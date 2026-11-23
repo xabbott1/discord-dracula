@@ -1,5 +1,6 @@
 // Reverts changes to guilds list by the Visual Refresh
 // Based on https://github.com/scattagain/VencordStuff/blob/main/css/GuildbarRevert.css
+// Updated 2026 by xabbott for current Discord guild bar compatibility.
 
 :root {
 	--guildbar-avatar-size: 48px;
@@ -11,21 +12,23 @@
 }
 
 nav[class*="guilds_"] {
-	defs > path {
-		/* #svg-mask-squircle */
-		d: path("M0 0.464C0 0.301585 0 0.220377 0.0316081 0.158343C0.0594114 0.103776 0.103776 0.0594114 0.158343 0.0316081C0.220377 0 0.301585 0 0.464 0H0.536C0.698415 0 0.779623 0 0.841657 0.0316081C0.896224 0.0594114 0.940589 0.103776 0.968392 0.158343C1 0.220377 1 0.301585 1 0.464V0.536C1 0.698415 1 0.779623 0.968392 0.841657C0.940589 0.896224 0.896224 0.940589 0.841657 0.968392C0.779623 1 0.698415 1 0.536 1H0.464C0.301585 1 0.220377 1 0.158343 0.968392C0.103776 0.940589 0.0594114 0.896224 0.0316081 0.841657C0 0.779623 0 0.698415 0 0.536V0.464Z");
-	}
-
+	// Discord's BlobMask now uses real 40/44/48/52-unit paths. Overriding
+	// defs > path or scaling the blob mask blanks every guild icon.
 	defs,
-	div[class^="blobContainer_"],
-	div[class^="listItemWrapper__"],
-	div[class*="wrapper_"]:not([class*="listItem__"] > [class*="wrapper_"]),
-	div[class^="dragInner__"], // Placeholder background while dragging guild items
-	svg[class*="placeholderMask__"],
-	svg:not([class*="placeholderMask__"]) > foreignObject,
+	div[class*="blobContainer_"],
+	div[class*="listItemWrapper_"],
+	div[class*="wrapper_"]:not([class*="listItem_"] > [class*="wrapper_"]),
+	svg[class*="placeholderMask_"],
+	svg:not([class*="placeholderMask_"]) > foreignObject,
 	{
 		width: var(--guildbar-avatar-size) !important;
 		height: var(--guildbar-avatar-size) !important;
+	}
+
+	// Placeholder background while dragging guild items
+	div[class*="dragInner_"] {
+		width: 40px;
+		height: 40px;
 	}
 
 	// Top Discord button
@@ -35,21 +38,21 @@ nav[class*="guilds_"] {
 	}
 
 	// Round all items
-	div[class^="childWrapper__"],
-	div[class^="childWrapper__"] img,
-	img[class^="icon_"],
-	div[class^="circleIconButton__"],
+	div[class*="childWrapper_"],
+	div[class*="childWrapper_"] img,
+	img[class*="icon_"],
+	div[class*="circleIconButton_"],
 	{
 		border-radius: 50% !important;
 		transition: border-radius 150ms linear;
 	}
 
 	// Un-round items when selected
-	div[draggable][class*="selected__"] {
-		div[class^="childWrapper__"],
-		div[class^="childWrapper__"] img,
-		img[class^="icon_"],
-		&[class^="circleIconButton__"],
+	div[draggable][class*="selected_"] {
+		div[class*="childWrapper_"],
+		div[class*="childWrapper_"] img,
+		img[class*="icon_"],
+		&[class*="circleIconButton_"],
 		{
 			border-radius: 27% !important;
 		}
@@ -64,38 +67,44 @@ nav[class*="guilds_"] {
 		}
 	}
 
-	// Guild/Avatar mask for unread badge
-	mask {
+	// Guild/avatar mask for unread badge. Only touch server icons; scaling
+	// folder masks breaks them.
+	svg[class*="shiftSVG_"] > mask {
 		--badge-offset: calc(var(--guildbar-avatar-size) - 40px);
 
-		& > use[href$="-lower_badge_masks"] {
+		use[href$="-lower_badge_masks"] {
 			translate: var(--badge-offset) var(--badge-offset);
 		}
 
-		& > use[href$="-upper_badge_masks"] {
+		use[href$="-upper_badge_masks"] {
 			translate: var(--badge-offset);
 		}
 
-		& > use[href$="-blob_mask"] {
-			scale: var(--blob-scale);
+		use[href$="-blob_mask"] {
+			scale: calc(var(--blob-scale) / 40);
+		}
+
+		rect {
+			width: 48px;
+			height: 48px;
 		}
 	}
 
-	div[class^="listItem__"] {
+	div[class*="listItem_"] {
 		margin-bottom: 8px;
 		height: min-content;
 	}
 
 	// Main guilds list and DMs list
-	div[class^="stack_"] {
+	div[class*="stack_"] {
 		gap: 0 !important;
 
 		// Expanded folder items container
-		div[data-drop-hovering][class*="isExpanded__"] {
+		div[data-drop-hovering][class*="isExpanded_"] {
 			margin-bottom: 8px;
 
 			// Folder items background track
-			span[class^="folderGroupBackground__"] {
+			span[class*="folderGroupBackground_"] {
 				border-bottom-left-radius: 24px;
 				border-bottom-right-radius: 24px;
 				border: none;
@@ -103,7 +112,7 @@ nav[class*="guilds_"] {
 			}
 
 			// Folder items
-			& > ul[class^="stack_"] {
+			& > ul[class*="stack_"] {
 				height: auto !important;
 
 				// Last folder group item
@@ -112,14 +121,14 @@ nav[class*="guilds_"] {
 				}
 			}
 
-			& > [class*="listItem__"] {
+			& > [class*="listItem_"] {
 				margin-bottom: 0;
 			}
 		}
 	}
 
 	// Pending clan applications folder icon
-	div[class^="pendingFolderButtonIcon_"] {
+	div[class*="pendingFolderButtonIcon_"] {
 		color: var(--dracula-accent);
 
 		& > svg { // stylelint-disable-line no-descending-specificity
@@ -129,8 +138,8 @@ nav[class*="guilds_"] {
 	}
 
 	// Folder icons
-	div[class^="folderButtonContent_"] {
-		& > div > div[class^="folderIcon__"] {
+	div[class*="folderButtonContent_"] {
+		& > div > div[class*="folderIcon_"] {
 			background-color: var(--dracula-tertiary);
 
 			& > svg {
@@ -139,13 +148,13 @@ nav[class*="guilds_"] {
 			}
 		}
 
-		& > div[class^="folderPreviewWrapper__"] {
+		& > div[class*="folderPreviewWrapper_"] {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			background-color: var(--dracula-tertiary);
 
-			& > div[class^="folderPreview__"] {
+			& > div[class*="folderPreview_"] {
 				width: calc(var(--guildbar-folder-size) * (2 / 3) + var(--custom-folder-preview-gap));
 				height: calc(var(--guildbar-folder-size) * (2 / 3) + var(--custom-folder-preview-gap));
 
@@ -167,7 +176,7 @@ nav[class*="guilds_"] {
 						font-size: 6px !important;
 					}
 
-					& > div[class^="acronym_"] {
+					& > div[class*="acronym_"] {
 						line-height: calc(var(--guildbar-folder-size) / 3);
 					}
 				}
