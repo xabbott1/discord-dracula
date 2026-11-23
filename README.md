@@ -1,5 +1,3 @@
-This is simply a fix for the following Discord theme only text modified here is the install instructions:
-
 # ₊˚ discord-dracula ˚₊
 
 cute dracula theme for discord~
