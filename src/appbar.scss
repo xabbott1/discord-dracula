@@ -75,6 +75,12 @@ div[data-fullscreen][class^="base_"] > div[class^="bar_"] {
 	}
 }
 
+// Settings shows Discord's system window bar. Hide the relocated bar then so
+// the two sets of window controls don't overlap.
+#app-mount:has(> div[class*="systemBar_"][class*="show_"]) div[data-fullscreen][class^="base_"] > div[class^="bar_"] {
+	display: none;
+}
+
 // Make new top app bar draggable
 section[class^="title_"] {
 	-webkit-app-region: drag;
