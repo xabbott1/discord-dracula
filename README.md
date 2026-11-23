@@ -80,6 +80,15 @@ This is to allow for hot-reloading the compiled theme.
 After running `pnpm watch`, any changes inside the `src` directory will cause the
 theme to be recompiled and reapplied.
 
+## ♡ publishing
+
+`pnpm build` writes the compressed theme to `dist/main.css` and its source map to
+`dist/main.css.map`. The GitHub Actions workflow publishes those two files to the
+`builds` branch, which GitHub Pages serves.
+
+If Actions is disabled on a fork, commit those two files to the `builds` branch
+manually.
+
 [//]: # (@formatter:off)
 
 [`dracula.theme.css`]: https://github.com/xabbott1/discord-dracula/blob/master/dracula.theme.css
