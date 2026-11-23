@@ -16,12 +16,21 @@ partially restores the old layout prior to the *visual refresh*
 <img src=".github/assets/showcase_4.webp" alt="Theme preview of the chat">
 </details>
 
+## ♡ maintained fork
+
+This is a maintained fork of [`rushiiMachine/discord-dracula`], originally
+created by rushii. The upstream theme is no longer maintained, so this fork
+carries compatibility updates for current Discord versions. Guild-bar
+compatibility is based on the actively maintained [`scattagain/VencordStuff`].
+
+Maintained by [`xabbott`].
+
 ## ♡ installation
 
 Add the following snippet **to the top** of your custom css, and **enable dark mode**:
 
 ```css
-@import url("https://rushiiMachine.github.io/discord-dracula/main.css");
+@import url("https://xabbott1.github.io/discord-dracula/main.css");
 ```
 
 Alternatively, you can download [`dracula.theme.css`] and add it to your
@@ -56,7 +65,7 @@ Other Visual Refresh reverts from [`MaiRiosIPla/unshittify-discord`].
 If you want to contribute, install [Node.js] 22+, and run the following commands:
 
 ```shell
-$ git clone https://github.com/rushiiMachine/discord-dracula
+$ git clone https://github.com/xabbott1/discord-dracula
 $ cd discord-dracula
 $ npm install --global corepack
 $ corepack install
@@ -73,8 +82,10 @@ theme to be recompiled and reapplied.
 
 [//]: # (@formatter:off)
 
-[`dracula.theme.css`]: https://github.com/rushiiMachine/discord-dracula/blob/master/dracula.theme.css
+[`dracula.theme.css`]: https://github.com/xabbott1/discord-dracula/blob/master/dracula.theme.css
 [sponsoring me ♡]: https://github.com/sponsors/rushiiMachine
+[`rushiiMachine/discord-dracula`]: https://github.com/rushiiMachine/discord-dracula
+[`xabbott`]: https://github.com/xabbott1
 [`fawni/dracula`]: https://github.com/fawni/dracula
 [`scattagain/VencordStuff`]: https://github.com/scattagain/VencordStuff
 [`MaiRiosIPla/unshittify-discord`]: https://github.com/MaiRiosIPla/unshittify-discord

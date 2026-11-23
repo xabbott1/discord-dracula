@@ -3,7 +3,7 @@ import {join} from "node:path";
 import chalk from "chalk";
 import * as sass from "sass";
 
-import {dateHeader} from "./utils.js";
+import {dateHeader, themeHeader} from "./utils.js";
 
 const srcPath = join(import.meta.dirname, "../src/main.scss");
 const distPath = join(import.meta.dirname, "../dist");
@@ -11,15 +11,7 @@ const outCssPath = join(distPath, "main.css");
 const outMapPath = join(distPath, "main.css.map");
 
 try {
-	let output = `
-/**
- * @name dracula
- * @description cute dracula theme for discord~
- * @author rushii
- * @website https://github.com/rushiiMachine/discord-dracula
- */
-/* This file is not versioned and is not linked to an update URL! */
-`.trimStart();
+	let output = themeHeader;
 
 	const result = sass.compile(srcPath, {
 			sourceMap: true,

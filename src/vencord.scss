@@ -112,7 +112,7 @@
 }
 
 // Add more info to own theme card
-.vc-settings-theme-grid .vc-addon-card a[href="https://github.com/rushiiMachine/discord-dracula"] {
+.vc-settings-theme-grid .vc-addon-card a[href="https://github.com/xabbott1/discord-dracula"] {
 	// Collapse the original line
 	text-indent: -9999px;
 	line-height: 0;
@@ -126,7 +126,7 @@
 		text-indent: 0;
 		display: block;
 		line-height: initial; // New content takes up original line height
-		content: "Please consider leaving a star or sponsoring me on GitHub ♡";
+		content: "Maintained fork of rushiiMachine/discord-dracula ♡";
 		font-size: 14px;
 	}
 }

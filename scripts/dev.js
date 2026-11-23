@@ -5,7 +5,7 @@ import chalk from "chalk";
 import dotenv from "dotenv";
 import * as sass from "sass";
 
-import {dateHeader} from "./utils.js";
+import {dateHeader, themeHeader} from "./utils.js";
 
 const dotenvResult = dotenv.config();
 const themesDir = dotenvResult.parsed?.THEMES_DIR;
@@ -53,14 +53,7 @@ function compile() {
 			}
 		);
 
-		let header = `
-/**
- * @name dracula
- * @description cute dracula theme for discord~
- * @author rushii
- * @website https://github.com/rushiiMachine/discord-dracula
- */
-`.trimStart();
+		let header = themeHeader;
 
 		mkdirSync(distPath, {recursive: true});
 		writeFileSync(devCssPath, header + result.css);
