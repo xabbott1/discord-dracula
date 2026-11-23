@@ -1,3 +1,5 @@
+This is simply a fix for the following Discord theme only text modified here is the install instructions:
+
 # ₊˚ discord-dracula ˚₊
 
 cute dracula theme for discord~
@@ -21,7 +23,7 @@ partially restores the old layout prior to the *visual refresh*
 Add the following snippet **to the top** of your custom css, and **enable dark mode**:
 
 ```css
-@import url("https://rushiiMachine.github.io/discord-dracula/main.css");
+@import url("https://xabbott1.github.io/discord-dracula/main.css");
 ```
 
 Alternatively, you can download [`dracula.theme.css`] and add it to your
